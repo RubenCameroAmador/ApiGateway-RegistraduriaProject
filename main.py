@@ -252,14 +252,64 @@ def eliminarResultado(id):
 
 #RESULTADOS BI
 
-@app.route("/votosPartido/<int:partidoId>",methods=['GET'])
-def votosPatido(partidoId):
+@app.route("/votosPartidos/",methods=['GET'])
+def getVotosPartido():
     headers = {"Content-Type": "application/json; charset=utf-8"}
-    url = dataConfig["url-backend-academic"] + '/votosPartido/' + partidoId
-    response = request.get(url, headers)
-    return response
+    url = dataConfig["url-backend-academic"] + '/votosPartidos/'
+    response = requests.get(url, headers=headers)
+    json = response.json()
+    return jsonify(json)
 
-#QUEDE POR AQUÍ FALTA CREARLE EL USUARIO-ROL
+@app.route("/votosPartido/<int:partidoId>",methods=['GET'])
+def getVotoPartido(partidoId):
+    headers = {"Content-Type": "application/json; charset=utf-8"}
+    url = dataConfig["url-backend-academic"] + '/votosPartido/'+str(partidoId)
+    response = requests.get(url, headers=headers)
+    json = response.json()
+    return jsonify(json)
+
+
+@app.route("/votosMesas/",methods=['GET'])
+def getVotosMesas():
+    headers = {"Content-Type": "application/json; charset=utf-8"}
+    url = dataConfig["url-backend-academic"] + '/votosMesas/'
+    response = requests.get(url, headers=headers)
+    json = response.json()
+    return jsonify(json)
+
+
+@app.route("/votosMesa/<string:numeroMesa>",methods=['GET'])
+def getVotoMesa(numeroMesa):
+    headers = {"Content-Type": "application/json; charset=utf-8"}
+    url = dataConfig["url-backend-academic"] + '/votosMesa/'+numeroMesa
+    response = requests.get(url, headers=headers)
+    json = response.json()
+    return jsonify(json)
+
+@app.route("/votosCandidatos/",methods=['GET'])
+def getVotosCandidatos():
+    headers = {"Content-Type": "application/json; charset=utf-8"}
+    url = dataConfig["url-backend-academic"] + '/votosCandidatos/'
+    response = requests.get(url, headers=headers)
+    json = response.json()
+    return jsonify(json)
+
+@app.route("/votosCandidato/<string:cedula>",methods=['GET'])
+def getVotoCandidato(cedula):
+    headers = {"Content-Type": "application/json; charset=utf-8"}
+    url = dataConfig["url-backend-academic"] + '/votosCandidato/'+cedula
+    response = requests.get(url, headers=headers)
+    json = response.json()
+    return jsonify(json)
+
+@app.route("/totalVotos/",methods=['GET'])
+def getTotalVotos():
+    headers = {"Content-Type": "application/json; charset=utf-8"}
+    url = dataConfig["url-backend-academic"] + '/totalVotos/'
+    response = requests.get(url, headers=headers)
+    json = response.json()
+    return jsonify(json)
+
 
 #fin middleware -------------->
 
